@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>TypeScript購物折扣練習</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: rgb(224, 165, 165);
+            font-family: 微軟正黑體;
+            font-size: 20px;
+        }
+        .content{
+            background-color: rgb(245, 237, 237);
+            height: 600px;
+        }
+        .VIPblock{
+            margin-left:20px;
+        }
+        .Normalblock{
+            margin-left:20px;
+        }
+        .submit{
+            margin-left:500px;
+        }   
+        .result{
+            background-color: rgb(245, 237, 237);
+            height: 345px;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="./discount.js"></script>
+
+    
+    <div class="container content"> 
+        <h1>折扣練習</h1><br /><br />
+   
+        <form>
+            
+            請輸入物品單價：
+            <input type="text" class="form-control column" id="price">
+            <br /><br />
+            
+
+            請輸入購買數量：
+            <input type="text" class="form-control column" id="qty">
+            <br /><br />
+
+            會員等級：
+            <label class="VIPblock">
+                <input type="radio" name="level" value="VIP" id="vip" checked> VIP會員
+            </label>
+            
+            <label class="Normalblock">
+                <input type="radio" name="level" value="Normal" id="normal"> 一般會員
+            </label>
+            
+            <br /><br /><br />
+            <div class="btn-group submit" role="group">
+                <button type="button" class="btn btn-default" id="send">送出</button>
+            </div>
+            
+        </form>
+        <br />    
+    </div>
+
+    <div class="container result">
+        <br /><br />           
+    </div>
+
+    <script>
+        $("#send").click(function(){
+            var finalPrice; 
+            var level;
+            var price = $("#price").val();
+            var qty = $("#qty").val();
+          
+            if( $("#vip").prop("checked") ){
+                level = Level.VIP;
+            }
+            else if( $("#normal").prop("checked") ){
+                level = Level.Normal;
+            }
+       
+            var calculate = new Calculate();
+            finalPrice = calculate.Calculate(price, qty, level);
+
+            $(".result").css("background-color", "rgb(231, 211, 238)");
+            $(".result").text("計算結果：" + finalPrice);
+                     
+        });
+    </script>
+</body>
+
+</html>
